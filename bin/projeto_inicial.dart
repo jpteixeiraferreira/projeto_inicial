@@ -4,6 +4,8 @@ void main() {
   heroi0.executar_tarefa0();
   heroi0.executar_tarefa1();
   heroi0.atacar(heroi0.nome, heroi0.dano_ataque, atacado: chefe0.nome);
+  exibe_arma(Arma.pistola) ;
+
 }
  /* Cliente cliente0 = Cliente(
       17616641741, "João Pedro Teixeira Ferreira", "09/03/2023", true, 0.00);
@@ -97,4 +99,29 @@ class Heroi extends Personagem implements Teste {
 abstract class Teste {
   void executar_tarefa0();
   void executar_tarefa1();
+}
+
+void exibe_arma(Arma arma_escolhida){
+  switch (arma_escolhida){
+    case Arma.espada_curta:
+      print("A arma escolhida foi a espada curta!");
+      break;
+    case Arma.espada_longa:
+      print("A arma escolhida foi a espada longa!");
+      break;
+    case Arma.machado:
+      print("A arma escolhida foi o machado!");
+      break;
+    case Arma.pistola:
+      print("A arma escolhida foi a pistola!");
+      break;
+  }
+}
+
+enum Arma {
+  espada_curta,
+  espada_longa,
+  machado,
+  pistola,
+
 }
