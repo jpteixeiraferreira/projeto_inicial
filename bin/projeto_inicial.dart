@@ -1,127 +1,87 @@
 void main() {
-  Heroi heroi0 = Heroi('JP', 1, 100, 'Humano', 5, true, 'Selvagens');
-  Chefe chefe0 = Chefe('Julia', 10, 500, 'Orc', 10, true, 'Fogo');
-  heroi0.executar_tarefa0();
-  heroi0.executar_tarefa1();
-  heroi0.atacar(heroi0.nome, heroi0.dano_ataque, atacado: chefe0.nome);
-  exibe_arma(Arma.pistola) ;
 
+  Pessoa pessoa0 = Pessoa("João Pedro", 24, true);
+  print(pessoa0.toMap());
 }
- /* Cliente cliente0 = Cliente(
-      17616641741, "João Pedro Teixeira Ferreira", "09/03/2023", true, 0.00);
-  print(cliente0.saldo);
-}
-
-class Cliente {
-  int cpf;
+class Pessoa{
   String nome;
-  final data_cadastro;
+  int idade;
+  bool estaAutenticada;
+
+  Pessoa(this.nome, this.idade, this.estaAutenticada);
+
+  Map<String,dynamic> toMap(){
+
+  return {
+  "nome": this.nome,
+  "idade": this.idade,
+  "estaAutenticada": this.estaAutenticada
+  };
+
+  }
+}
+
+class Cadastro_pessoa {
+  Documento tipo_documento;
+  int numero_documento;
+  String nome;
+  String data_nascimento;
+  String data_cadastro;
   bool ativo;
-  double saldo;
 
-  Cliente(this.cpf, this.nome, this.data_cadastro, this.ativo, this.saldo);
-}
+  Cadastro_pessoa(this.tipo_documento, this.numero_documento, this.nome,
+      this.data_nascimento, this.data_cadastro, this.ativo);
 
-double func_acrescenta_juros(int dias, double saldo,
-    {String nome_cliente = 'não identificado', double juros = 0.05}) {
-  saldo = saldo + (saldo * (juros / 30)) * dias;
-  print(
-      'O saldo do cliente $nome_cliente após $dias dias é de R\$ ${saldo
-          .toStringAsFixed(2)}');
-  print('O saldo do cliente $nome_cliente após $dias dias é de R\$ $saldo');
+  bool func_validar_documento(tipo_documento, numero_documento) {
+    bool is_valido = true;
+    if (tipo_documento == Documento.cpf) {
+      if (numero_documento.toString().length == 11) {
+        is_valido = true;
+      } else {
+        is_valido = false;
+      }
+    } else if (tipo_documento == Documento.cnpj) {
+      if (numero_documento.toString().length == 14) {
+        is_valido = true;
+      } else {
+        is_valido = false;
+      }
+    }
 
-  return saldo;
-}
-
-bool func_validar_cpf(int cpf) {
-  if (cpf
-      .toString()
-      .length == 11) {
-    return true;
-  } else {
-    return false;
+    return is_valido;
   }
 }
 
-void func_mostrar_cpf_valido(cpf_valido) {
-  if (cpf_valido == false) {
-    print('Este cpf é inválido');
-  } else if (cpf_valido == true) {
-    print('Este cpf é válido');
-  }
-}
-*/
-class Personagem {
-  String nome;
-  int nivel;
-  int pontos_de_vida;
-  String raca;
-  int dano_ataque;
-  bool esta_vivo;
+class Colaboradores extends Cadastro_pessoa {
+  Cargo cargo;
+  double salario;
 
-  Personagem(this.nome, this.nivel, this.pontos_de_vida, this.raca,
-      this.dano_ataque,
-      this.esta_vivo);
-
-  void atacar(nome, dano_ataque, {required atacado}){
-    print(
-        "O personagem: $nome atacou: $atacado causando $dano_ataque pontos de dano!");
-  }
-
-  void quanto_de_vida(nome, pontos_de_vida) {
-    print("O personagem $nome possui $pontos_de_vida pontos de vida!");
-  }
-}
-class Chefe extends Personagem {
-  String elemento;
-
-  Chefe(String nome, int nivel, int pontos_de_vida, String raca,
-      int dano_ataque, bool esta_vivo, this.elemento) :
-        super(nome, nivel, pontos_de_vida, raca, dano_ataque, esta_vivo);
-}
-class Heroi extends Personagem implements Teste {
-  String cla;
-
-  Heroi(String nome, int nivel, int pontos_de_vida, String raca,
-      int dano_ataque, bool esta_vivo, this.cla):
-      super(nome, nivel, pontos_de_vida, raca, dano_ataque, esta_vivo);
-
-  @override
-  void executar_tarefa0() {
-    print("Tarefa 0 executada");
-  }
-  @override
-  void executar_tarefa1() {
-    print("Tarefa 1 executada");
-  }
+  Colaboradores(
+      Documento tipo_documento,
+      int numero_documento,
+      String nome,
+      String data_nascimento,
+      String data_cadastro,
+      this.cargo,
+      this.salario,
+      bool ativo)
+      : super(tipo_documento, numero_documento, nome, data_nascimento,
+            data_cadastro, ativo);
 }
 
-abstract class Teste {
-  void executar_tarefa0();
-  void executar_tarefa1();
+enum Cargo {
+  gerente,
+  suporte,
+  programador,
+  supervisor,
+}
+enum Documento {
+  cpf,
+  cnpj,
 }
 
-void exibe_arma(Arma arma_escolhida){
-  switch (arma_escolhida){
-    case Arma.espada_curta:
-      print("A arma escolhida foi a espada curta!");
-      break;
-    case Arma.espada_longa:
-      print("A arma escolhida foi a espada longa!");
-      break;
-    case Arma.machado:
-      print("A arma escolhida foi o machado!");
-      break;
-    case Arma.pistola:
-      print("A arma escolhida foi a pistola!");
-      break;
-  }
+ Set<String> func_cria_algo(teste_set, String algo ){
+ teste_set.add(algo);
+ return teste_set;
 }
 
-enum Arma {
-  espada_curta,
-  espada_longa,
-  machado,
-  pistola,
-
-}
