@@ -15,7 +15,9 @@ class Pessoa{
   return {
   "nome": this.nome,
   "idade": this.idade,
-  "estaAutenticada": this.estaAutenticada
+  "estaAutenticada": this.estaAutenticadaeau9fhaseuifhaseifheiufh
+    afiueshafuaeshf
+    fasuehau
   };
 
   }
